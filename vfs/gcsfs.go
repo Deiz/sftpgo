@@ -122,7 +122,7 @@ func (fs GCSFs) Stat(name string) (os.FileInfo, error) {
 			}
 			if fs.isEqual(attrs.Name, name) {
 				isDir := strings.HasSuffix(attrs.Name, "/")
-				result = NewFileInfo(name, isDir, attrs.Size, attrs.Updated, false)
+				result = NewFileInfo(name, isDir, attrs.Size, attrs.Created, false)
 				break
 			}
 		}
@@ -357,7 +357,7 @@ func (fs GCSFs) ReadDir(dirname string) ([]os.FileInfo, error) {
 			if !attrs.Deleted.IsZero() {
 				continue
 			}
-			fi := NewFileInfo(name, isDir, attrs.Size, attrs.Updated, false)
+			fi := NewFileInfo(name, isDir, attrs.Size, attrs.Created, false)
 			result = append(result, fi)
 		}
 	}
@@ -520,7 +520,7 @@ func (fs GCSFs) Walk(root string, walkFn filepath.WalkFunc) error {
 		if len(name) == 0 {
 			continue
 		}
-		err = walkFn(attrs.Name, NewFileInfo(name, isDir, attrs.Size, attrs.Updated, false), nil)
+		err = walkFn(attrs.Name, NewFileInfo(name, isDir, attrs.Size, attrs.Created, false), nil)
 		if err != nil {
 			break
 		}
