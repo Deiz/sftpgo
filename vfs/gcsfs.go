@@ -27,7 +27,7 @@ import (
 )
 
 var (
-	gcsDefaultFieldsSelection = []string{"Name", "Size", "Deleted", "Updated"}
+	gcsDefaultFieldsSelection = []string{"Name", "Size", "Deleted", "Updated", "Created"}
 )
 
 // GCSFs is a Fs implementation for Google Cloud Storage.
